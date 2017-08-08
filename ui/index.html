@@ -1,17 +1,42 @@
 <!doctype html>
 <html>
-    <head>
-        <link href="/ui/style.css" rel="stylesheet" />
-    </head>
-    <body>
-        <div class="center">
-            <img src="/ui/madi.png" class="img-medium"/>
-        </div>
-        <br>
-        <div id = 'main.text' class="center text-big bold">
-            Hi! This is My First App.
-        </div>
-        <script type="text/javascript" src="main.js">
-        </script>
-    </body>
+        <body>
+        <div id='main text' class="center text-big bold">
+                                   SATHASIVAM 
+                    </div>
+            	    <div class="center text-big bold">
+            	      !!  My First Web App !!
+            	    </div>
+            	    <br>
+
+            	    <hr>
+                    <h3> Quick Bites</h3>
+                    <div>
+                        1. This is a recreational webapp
+                        2. Every page of this webapp was a learning step for me
+                        3. It's my first webapp ever! ;)
+                    </div>
+
+                    <br>
+                    <div class = "footer"> 
+                    This button <button id="counter"> Click Me</button> has been clicked <span id="count">0</span>times.
+                    </div>
+           </div>
+           <script>
+            console.log("JS Loaded")
+            var button = document.getElementById('counter')
+            var counter = 0;
+            
+             button.onclick = function() {
+              //make a request to counter endpoint
+               //capture the response and store it in a variable
+               //render the variable in correct span
+
+              counter = counter + 1;
+              var span = document.getElementById('count');
+              span.innerHTML = counter.toString();
+              };
+              console.log("Things went perfect");
+           </script>
+        </body>
 </html>
