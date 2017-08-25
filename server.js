@@ -29,6 +29,25 @@ app.get('/ui/madi.png', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'madi.png'));
 });
 
+app.get('/create-user', function (req, res) {
+    var salt = crypto.getRandomBytes(128).toStrings('hex');
+    var dbString = hash(password, salt);
+    pool.query('INSERT INTO "user" (username, password) VALUES($1,$2)', [username, password], function(err, result) {
+    });
+    
+});
+
+var pool = new pool(config);
+app.get('/test-db', function (req, res) {
+    pool.query('SELECT * from test', function(err, result) {
+        if (err) {
+            res.status(500).send(err.toString());
+        } else {
+            res.send(JSON.stringfy(result.rows));
+        }
+        
+    });
+});
 
 // Do not change port, otherwise your app won't run on IMAD servers
 // Use 8080 only for local development if you already have apache running on 80
