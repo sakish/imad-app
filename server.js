@@ -2,10 +2,11 @@ var express = require('express');
 var morgan = require('morgan');
 var path = require('path');
 var crypto = require('crypto');
+var bodyParser = require('body-parser');
 
 var app = express();
 app.use(morgan('combined'));
-
+app.use(bodyParser.json());
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
@@ -29,18 +30,39 @@ app.get('/ui/madi.png', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'madi.png'));
 });
 
-app.get('/create-user', function (req, res) {
+app.post('/create-user', function (req, res) {
+    var username = req.body.username;
+    var password = req.body.password;
     var salt = crypto.getRandomBytes(128).toStrings('hex');
     var dbString = hash(password, salt);
-    pool.query('INSERT INTO "user" (username, password) VALUES($1,$2)', [username, password], function(err, result) {
+    pool.query('INSERT INTO "user" username = $1', [username], function(err, result) {
+          if (err) {
+            res.status(500).send(err.toString());
+        } else {
+            if (result.rows.length == 0) {
+                res.status(400).send('username / password is invalid');
+            } else {
+                var dbString = result.row[0].password;
+                
+            }
+            res.send('user successfully created' + username);
+        }
+    });
+    
+});
+
+app.post('/login', function (req, res)) {
+    var username = req.body.username;
+    var password = req.body.password;
+    
+    pool.query('SELECT * from "user" username = $1, password) VALUES($1,$2)', [username, password], function(err, result) {
           if (err) {
             res.status(500).send(err.toString());
         } else {
             res.send('user successfully created' + username);
         }
     });
-    
-});
+}
 
 var pool = new pool(config);
 app.get('/test-db', function (req, res) {
