@@ -44,8 +44,9 @@ app.post('/create-user', function (req, res) {
             } else {
                 var dbString = result.row[0].password;
                 
+            
+                res.send('user successfully created' + username);
             }
-            res.send('user successfully created' + username);
         }
     });
     
