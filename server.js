@@ -43,7 +43,7 @@ app.post('/create-user', function (req, res) {
                 res.status(400).send('username / password is invalid');
             } else {
                 var dbString = result.row[0].password;
-                
+                dbString.split($);
             
                 res.send('user successfully created' + username);
             }
