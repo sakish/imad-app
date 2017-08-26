@@ -60,6 +60,9 @@ app.post('/login', function (req, res) {
           if (err) {
             res.status(500).send(err.toString());
         } else {
+            var dbString = result.rows[0].password;
+            var salt = dbString.split('$')[2];
+            var hashedpassword = hash(password, salt);
             res.send('user successfully created' + username);
         }
     });
@@ -71,6 +74,7 @@ app.get('/test-db', function (req, res) {
         if (err) {
             res.status(500).send(err.toString());
         } else {
+ 
             res.send(JSON.stringfy(result.rows));
         }
         
