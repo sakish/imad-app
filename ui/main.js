@@ -20,5 +20,5 @@ submit.onclick = function() {
     var nameInput = document.getElementById('name');
     var name = nameInput.value;
     request.open('POST', 'http://sarajagop.imad.hasura-app.io/submit-none?none=' + name, true);
-    request.send(JSON, strinfigy({username:username, password: password});
+    request.send(JSON, strinfigy({username:username, password:password});
 };
