@@ -52,7 +52,7 @@ app.post('/create-user', function (req, res) {
     
 });
 
-app.post('/login', function (req, res)) {
+app.post('/login', function (req, res) {
     var username = req.body.username;
     var password = req.body.password;
     
@@ -63,7 +63,7 @@ app.post('/login', function (req, res)) {
             res.send('user successfully created' + username);
         }
     });
-}
+});
 
 var pool = new pool(config);
 app.get('/test-db', function (req, res) {
